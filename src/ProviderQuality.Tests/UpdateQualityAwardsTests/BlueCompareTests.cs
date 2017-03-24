@@ -10,7 +10,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
     public class BlueCompareTests
     {
         [TestMethod]
-        public void TestDailyProcessStandard()
+        public void TestUpdateAwardStandard()
         {
             var app = new Program()
             {
@@ -32,7 +32,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
         }
 
         [TestMethod]
-        public void TestDailyProcess10OrLessDays()
+        public void TestUpdateAward10OrLessDays()
         {
             var app = new Program()
             {
@@ -55,7 +55,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
 
 
         [TestMethod]
-        public void TestDailyProcess5OrLessDays()
+        public void TestUpdateAward5OrLessDays()
         {
             var app = new Program()
             {
@@ -78,7 +78,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
 
 
         [TestMethod]
-        public void TestDailyProcessOver50()
+        public void TestUpdateAwardExceedMaxValue()
         {
             var app = new Program()
             {
@@ -101,7 +101,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
 
 
         [TestMethod]
-        public void TestDailyProcessofExpired()
+        public void TestUpdateAwardExpired()
         {
             var app = new Program()
             {
@@ -124,26 +124,49 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
 
 
         [TestMethod]
-        public void TestDailyProcessofExample()
+        public void TestUpdateAwardInvalidQuality()
         {
             var app = new Program()
             {
                 Awards = new List<Award>
                 {
-                    new BlueCompare(15,20)
+                    new BlueCompare(15,60)
                 }
             };
 
             Assert.IsTrue(app.Awards.Count == 1);
             Assert.IsTrue(app.Awards[0].GetType() == typeof(BlueCompare));
-            Assert.IsTrue(app.Awards[0].Quality == 20);
+            Assert.IsTrue(app.Awards[0].Quality == 60);
             Assert.IsTrue(app.Awards[0].ExpiresIn == 15);
 
             app.UpdateAwards();
 
-            Assert.IsTrue(app.Awards[0].Quality == 21);
+            Assert.IsTrue(app.Awards[0].Quality == 50);
             Assert.IsTrue(app.Awards[0].ExpiresIn == 14);
         }
+
+        [TestMethod]
+        public void TestUpdateAwardExceedMaxQuality()
+        {
+            var app = new Program()
+            {
+                Awards = new List<Award>
+                {
+                    new BlueCompare(2,49)
+                }
+            };
+
+            Assert.IsTrue(app.Awards.Count == 1);
+            Assert.IsTrue(app.Awards[0].GetType() == typeof(BlueCompare));
+            Assert.IsTrue(app.Awards[0].Quality == 49);
+            Assert.IsTrue(app.Awards[0].ExpiresIn == 2);
+
+            app.UpdateAwards();
+
+            Assert.IsTrue(app.Awards[0].Quality == 50);
+            Assert.IsTrue(app.Awards[0].ExpiresIn == 1);
+        }
+
 
     }
 }

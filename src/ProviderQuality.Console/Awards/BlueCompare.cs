@@ -11,25 +11,29 @@
             if (Expired)
             {
                 Quality = 0;
+                return;
             }
-            else
+                 
+            if (Quality == 50) return;
+
+            if (ExpiresIn > 10)
             {
-                if (Quality >= 50) return;
+                Quality++;
+            }
 
-                if (ExpiresIn > 10)
-                {
-                    Quality++;
-                }
+            if (ExpiresIn <= 10 && ExpiresIn > 5)
+            {
+                Quality = Quality + 2;
+            }
 
-                if (ExpiresIn <= 10 && ExpiresIn > 5)
-                {
-                    Quality = Quality + 2;
-                }
-
-                if (ExpiresIn <= 5)
-                {
-                    Quality = Quality + 3;
-                }
+            if (ExpiresIn <= 5)
+            {
+                Quality = Quality + 3;
+            }
+            
+            if (Quality > 50)
+            {
+                Quality = 50;
             }
         }
     }

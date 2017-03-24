@@ -9,7 +9,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
     public class BlueFirstTests
     {
         [TestMethod]
-        public void TestDailyProcessStandard()
+        public void TestUpdateAwardStandard()
         {
             var app = new Program()
             {
@@ -31,7 +31,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
         }
 
         [TestMethod]
-        public void TestDailyProcessExpired()
+        public void TestUpdateAwardExpired()
         {
             var app = new Program()
             {
@@ -53,7 +53,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
         }
 
         [TestMethod]
-        public void TestDailyProcessOver50()
+        public void TestUpdateAwardExceedMaxValue()
         {
             var app = new Program()
             {
@@ -75,25 +75,25 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
         }
 
         [TestMethod]
-        public void TestDailyProcessExample()
+        public void TestUpdateAwardInvalidQuality()
         {
             var app = new Program()
             {
                 Awards = new List<Award>
                 {
-                    new BlueFirst(2,0)
+                    new BlueFirst(2,55)
                     
                 }
             };
 
             Assert.IsTrue(app.Awards.Count == 1);
             Assert.IsTrue(app.Awards[0].GetType() == typeof(BlueFirst));
-            Assert.IsTrue(app.Awards[0].Quality == 0);
+            Assert.IsTrue(app.Awards[0].Quality == 55);
             Assert.IsTrue(app.Awards[0].ExpiresIn == 2);
 
             app.UpdateAwards();
 
-            Assert.IsTrue(app.Awards[0].Quality == 1);
+            Assert.IsTrue(app.Awards[0].Quality == 50);
             Assert.IsTrue(app.Awards[0].ExpiresIn == 1);
         }
 

@@ -9,7 +9,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
     public class BlueStarTests
     {
         [TestMethod]
-        public void TestDailyProcessStandard()
+        public void TestUpdateAwardStandard()
         {
             var app = new Program()
             {
@@ -32,7 +32,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
 
 
         [TestMethod]
-        public void TestDailyProcessExpired() 
+        public void TestUpdateAwardExpired() 
         {
             var app = new Program()
             {
@@ -53,6 +53,49 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
             Assert.IsTrue(app.Awards[0].ExpiresIn == 0);
         }
 
+        [TestMethod]
+        public void TestUpdateAwardInvalidQuality()
+        {
+            var app = new Program()
+            {
+                Awards = new List<Award>
+                {
+                    new BlueStar(4,60)
+                }
+            };
 
+            Assert.IsTrue(app.Awards.Count == 1);
+            Assert.IsTrue(app.Awards[0].GetType() == typeof(BlueStar));
+            Assert.IsTrue(app.Awards[0].Quality == 60);
+            Assert.IsTrue(app.Awards[0].ExpiresIn == 4);
+
+            app.UpdateAwards();
+
+            Assert.IsTrue(app.Awards[0].Quality == 48);
+            Assert.IsTrue(app.Awards[0].ExpiresIn == 3);
+        }
+
+
+        [TestMethod]
+        public void TestUpdateAwardNegitiveQuality()
+        {
+            var app = new Program()
+            {
+                Awards = new List<Award>
+                {
+                    new BlueStar(4,1)
+                }
+            };
+
+            Assert.IsTrue(app.Awards.Count == 1);
+            Assert.IsTrue(app.Awards[0].GetType() == typeof(BlueStar));
+            Assert.IsTrue(app.Awards[0].Quality == 1);
+            Assert.IsTrue(app.Awards[0].ExpiresIn == 4);
+
+            app.UpdateAwards();
+
+            Assert.IsTrue(app.Awards[0].Quality == 0);
+            Assert.IsTrue(app.Awards[0].ExpiresIn == 3);
+        }
     }
 }

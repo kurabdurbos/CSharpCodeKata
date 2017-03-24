@@ -9,7 +9,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
     public class AcmePartnerFacilityTests
     {
         [TestMethod]
-        public void TestDailyProcessStandard()
+        public void TestUpdateAwardStandard()
         {
             var app = new Program()
             {
@@ -31,7 +31,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
         }
 
         [TestMethod]
-        public void TestDailyProcessExpired()
+        public void TestUpdateAwardExpired()
         {
             var app = new Program()
             {
@@ -53,7 +53,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
         }
 
         [TestMethod]
-        public void TestDailyProcessNegitiveQuality()
+        public void TestUpdateAwardNegitiveQuality()
         {
             var app = new Program()
             {
@@ -76,7 +76,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
 
 
         [TestMethod]
-        public void TestDailyProcessNegitiveExpiresIn()
+        public void TestUpdateAwardNegitiveExpiresIn()
         {
             var app = new Program()
             {
@@ -99,7 +99,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
 
 
         [TestMethod]
-        public void TestDailyProcessQualityOver50()
+        public void TestUpdateAwardExceedMaxValue()
         {
             var app = new Program()
             {
@@ -121,24 +121,24 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
         }
 
         [TestMethod]
-        public void TestDailyProcessExample()
+        public void TestUpdateAwardInvalidQuality()
         {
             var app = new Program()
             {
                 Awards = new List<Award>
                 {
-                    new AcmePartnerFacility(5,7)
+                    new AcmePartnerFacility(5,60)
                 }
             };
 
             Assert.IsTrue(app.Awards.Count == 1);
             Assert.IsTrue(app.Awards[0].GetType() == typeof(AcmePartnerFacility));
-            Assert.IsTrue(app.Awards[0].Quality == 7);
+            Assert.IsTrue(app.Awards[0].Quality == 60);
             Assert.IsTrue(app.Awards[0].ExpiresIn == 5);
 
             app.UpdateAwards();
 
-            Assert.IsTrue(app.Awards[0].Quality == 6);
+            Assert.IsTrue(app.Awards[0].Quality == 49);
             Assert.IsTrue(app.Awards[0].ExpiresIn == 4);
         }
 

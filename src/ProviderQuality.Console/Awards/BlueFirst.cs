@@ -14,6 +14,8 @@ namespace ProviderQuality.Console.Awards
 
         public override void ProcessDailyQuality()
         {
+            if (Quality == 50) return;
+
             if (Expired)
             {
                 if (Quality < 50)

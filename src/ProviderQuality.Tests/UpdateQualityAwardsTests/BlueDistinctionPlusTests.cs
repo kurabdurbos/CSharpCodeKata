@@ -9,7 +9,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
     public class BlueDistinctionPlusTests
     {
         [TestMethod]
-        public void TestDailyProcessStandard() 
+        public void TestUpdateAwardStandard() 
         {
             var app = new Program()
             {
@@ -32,7 +32,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
 
 
         [TestMethod]
-        public void TestDailyProcessExpired() 
+        public void TestUpdateAwardExpired() 
         {
             var app = new Program()
             {
@@ -54,7 +54,7 @@ namespace ProviderQuality.Tests.UpdateQualityAwardsTests
         }
 
         [TestMethod]
-        public void TestDailyProcessInvalidQuality()
+        public void TestUpdateAwardInvalidQuality()
         {
             var app = new Program()
             {
