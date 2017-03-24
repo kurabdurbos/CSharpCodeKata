@@ -50,8 +50,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UpdateQualityAwardsTests.cs" />
+    <Compile Include="UpdateQualityAwardsTests\AcmePartnerFacilityTests.cs" />
+    <Compile Include="UpdateQualityAwardsTests\BlueCompareTests.cs" />
+    <Compile Include="UpdateQualityAwardsTests\BlueDistinctionPlusTests.cs" />
+    <Compile Include="UpdateQualityAwardsTests\BlueFirstTests.cs" />
+    <Compile Include="UpdateQualityAwardsTests\BlueStarTests.cs" />
+    <Compile Include="UpdateQualityAwardsTests\GovQualityPlusTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateQualityAwardsTests\TopConnectedProvidersTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProviderQuality.Console\ProviderQuality.Console.csproj">

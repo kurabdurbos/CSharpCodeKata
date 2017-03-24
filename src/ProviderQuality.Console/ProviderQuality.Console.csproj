@@ -41,7 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Award.cs" />
+    <Compile Include="Awards\AcmePartnerFacility.cs" />
+    <Compile Include="Awards\Award.cs" />
+    <Compile Include="Awards\BlueCompare.cs" />
+    <Compile Include="Awards\BlueDistinctionPlus.cs" />
+    <Compile Include="Awards\BlueFirst.cs" />
+    <Compile Include="Awards\BlueStar.cs" />
+    <Compile Include="Awards\GovQualityPlus.cs" />
+    <Compile Include="Awards\TopConnectedProviders.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -49,6 +56,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
